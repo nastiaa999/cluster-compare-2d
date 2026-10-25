@@ -1,0 +1,13 @@
+[project]
+name = "cc2d"
+version = "0.1.0"
+description = "ClusterCompare 2D: сравнение алгоритмов кластеризации двумерных данных"
+requires-python = ">=3.11,<3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-m 'not slow'"
+markers = [
+    "slow: измерения временных характеристик на 5000 точках (запуск: pytest -m slow)",
+]

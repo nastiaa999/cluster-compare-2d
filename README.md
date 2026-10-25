@@ -19,14 +19,19 @@ py -3.11 -m venv .venv
 .venv\Scripts\python -m cc2d
 ```
 
+Графический интерфейс в разработке; сейчас реализовано ядро (пакет `cc2d.core`) и визуализация.
+
 ## Тесты
 
 ```
-.venv\Scripts\python -m pytest --cov=cc2d
+.venv\Scripts\python -m pytest --cov=cc2d --cov-branch
 ```
+
+Измерения времени на 5000 точках запускаются отдельно: `pytest -m slow`.
 
 ## Структура
 
-- `cc2d/` — исходный код программы
+- `cc2d/core/` — ядро: источники данных, предобработка, алгоритмы, метрики, эксперимент, экспорт
+- `cc2d/visualization.py` — диаграммы рассеяния
 - `tests/` — тесты pytest
 - `docs/` — документация Sphinx
