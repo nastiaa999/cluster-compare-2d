@@ -73,7 +73,15 @@ def test_all_noise(blobs500):
     points, _ = blobs500
     result = evaluate(DBSCAN(eps=0.01, min_samples=100).run(points, 0), points)
     assert result.metrics[SILHOUETTE] is None
-    assert result.message == f"{MSG_ALL_NOISE}; {MSG_NOISE}"
+    assert result.message == MSG_ALL_NOISE
+
+
+def test_most_points_noise(blobs500):
+    """Решение 12.2: шум больше половины точек, но не все."""
+    points, _ = blobs500
+    result = evaluate(DBSCAN(eps=0.05, min_samples=8).run(points, 0), points)
+    assert 250 < result.n_noise < 500
+    assert MSG_NOISE in result.message
 
 
 def test_perfect_partition():

@@ -44,6 +44,7 @@ class QualityEvaluator:
 
     Замечание составляется из сработавших правил в таком порядке: внутренние
     метрики не определены; силуэт меньше 0,25; больше половины точек — шум.
+    Если шумом оказались все точки, выводится только первая фраза.
     """
 
     def __init__(self):
@@ -78,7 +79,7 @@ class QualityEvaluator:
 
         if defined and metrics[SILHOUETTE] < WEAK_SILHOUETTE:
             notes.append(MSG_WEAK)
-        if result.n_noise > NOISE_SHARE * result.n_points:
+        if n_valid > 0 and result.n_noise > NOISE_SHARE * result.n_points:
             notes.append(MSG_NOISE)
 
         result.set_metrics(metrics)

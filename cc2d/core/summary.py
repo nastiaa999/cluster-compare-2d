@@ -20,7 +20,7 @@ COLUMNS = (
     ("n_noise", "Шум"),
     (SILHOUETTE, "Силуэт"),
     (DAVIES_BOULDIN, "Дэвис–Болдин"),
-    (CALINSKI_HARABASZ, "Калински–Харабас"),
+    (CALINSKI_HARABASZ, "Калински–Харабаш"),
     (ARI, "ARI"),
     (NMI, "NMI"),
     (TIME, "Время, с"),
