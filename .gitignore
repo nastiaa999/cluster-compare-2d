@@ -10,3 +10,4 @@ dist/
 docs/_build/
 .idea/
 .vscode/
+docs/_autosummary/
