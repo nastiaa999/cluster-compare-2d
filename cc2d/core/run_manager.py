@@ -69,15 +69,26 @@ class RunManager:
         if callback:
             callback(percent, text)
 
+    def prepare(self) -> None:
+        """Готовит запуск: сбрасывает прежнюю просьбу об отмене.
+
+        Интерфейс вызывает этот метод в своём потоке до старта фонового потока,
+        поэтому «Отменить», нажатая сразу после «Запустить», не теряется.
+        """
+        self._cancel.clear()
+        self.status = RUNNING
+
     def run(self, progress: ProgressCallback | None = None) -> RunOutput:
         """Выполняет расчёт («запустить»).
+
+        Если :meth:`prepare` не вызывался, он вызывается здесь.
 
         :raises CancelledError: если расчёт отменён
         :raises AllAlgorithmsFailedError: если не выполнился ни один алгоритм
         :raises DataPreparationError: если набор не подготовлен
         """
-        self._cancel.clear()
-        self.status = RUNNING
+        if self.status != RUNNING:
+            self.prepare()
         try:
             output = self._run(progress)
         except CancelledError:

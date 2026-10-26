@@ -88,6 +88,14 @@ def test_run_after_cancel_works(manager):
     assert len(manager.run().results) == 4
 
 
+def test_cancel_right_after_prepare(manager):
+    """«Отменить» сразу после «Запустить», пока поток не начал работу, не теряется."""
+    manager.prepare()
+    manager.cancel()
+    with pytest.raises(CancelledError):
+        manager.run()
+
+
 def test_no_algorithms(manager):
     manager.experiment.algorithms = []
     with pytest.raises(ParameterError):
