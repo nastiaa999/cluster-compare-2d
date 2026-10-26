@@ -57,4 +57,5 @@ def run(argv: list[str] | None = None) -> int:
     _install_excepthook()
     window = MainWindow()
     _fit_to_screen(window)
+    log.info("Главное окно открыто")
     return app.exec()
